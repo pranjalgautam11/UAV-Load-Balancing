@@ -2,6 +2,9 @@
 
 A simulation GUI for **task offloading and energy efficiency** using multiple UAVs (Unmanned Aerial Vehicles) in an IoT environment, designed for Mobile Edge Computing (MEC) scenarios.
 
+### 🖥️ Proposed Architecture
+<img src="Screenshots/Architecture-Diagram.jpg"/>
+
 ---
 
 ## 🧠 Project Summary
@@ -14,6 +17,7 @@ This simulation demonstrates:
 - **Energy efficiency comparison** between:
   - Single UAV-based offloading
   - Proposed Multi-UAV offloading model
+ 
 
 Developed using Python's `tkinter` for GUI and `matplotlib` for visualization.
 
@@ -21,16 +25,15 @@ Developed using Python's `tkinter` for GUI and `matplotlib` for visualization.
 
 ## 🎥 Screenshots
 
-### 🖥️ Proposed Architecture
-![Architecture](Screenshots/Architecture-Diagram.jpg)
-
 ### 🚀 UAV Movement & IoT Node Deployment
-![Simulation](Screenshots/Trajectory.jpg)
+<p align="center"><img src="Screenshots/Trajectory.jpg" width="400"/></p>
 
-### 📊 Energy Efficiency Graph
-![Energy_Consumption_Graph](Screenshots/Energy_Consumption.jpg)
-![Latency](Screenshots/Latency.jpg)
-![Task_Completion](Screenshots/Task_Completion.jpg)
+### 📊 Energy Efficiency, Latency, Task Completion Graph
+<p align="center">
+  <img src="Screenshots/Energy_Consumption.jpg" width="300"/>
+  <img src="Screenshots/Task_Completion.jpg" width="300"/>
+  <img src="Screenshots/Latency.jpg" width="300" height="188"/> 
+</p>
 
 ---
 
@@ -52,3 +55,4 @@ Install dependencies:
 
 ```bash
 pip install matplotlib numpy
+```
