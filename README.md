@@ -21,16 +21,16 @@ Developed using Python's `tkinter` for GUI and `matplotlib` for visualization.
 
 ## 🎥 Screenshots
 
-### 🖥️ Main GUI Interface
-![Main GUI](screenshots/main_gui.png)
+### 🖥️ Proposed Architecture
+![Architecture](Screenshots/Architecture-Diagram.jpg)
 
 ### 🚀 UAV Movement & IoT Node Deployment
-![Simulation](screenshots/simulation.png)
+![Simulation](Screenshots/Trajectory.jpg)
 
 ### 📊 Energy Efficiency Graph
-![Graph](screenshots/graph.png)
-
-> 📌 _Add your screenshots in the `screenshots/` folder. Update filenames if you use different names._
+![Energy_Consumption_Graph](Screenshots/Energy_Consumption.jpg)
+![Latency](Screenshots/Latency.jpg)
+![Task_Completion](Screenshots/Task_Completion.jpg)
 
 ---
 
