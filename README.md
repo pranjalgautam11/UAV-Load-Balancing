@@ -76,15 +76,15 @@ Steps:
 ---
 
 
-### D. Performance Graphs
+## Performance Graphs
 - Energy Comparison Graph  
-  [Energy Graph]("Screenshots/Energy_Consumption.jpg")
+  [Energy Graph](Screenshots/Energy_Consumption.jpg)
 
 - Latency Reduction Graph  
-  [Latency Graph]("Screenshots/Latency.jpg")
+  [Latency Graph](Screenshots/Latency.jpg)
 
 - Task Completion Efficiency Graph  
-  [Efficiency Graph]("Screenshots/Task_Completion.jpg")
+  [Efficiency Graph](Screenshots/Task_Completion.jpg)
 
 ---
 
