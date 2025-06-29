@@ -156,6 +156,6 @@ This project is licensed under the MIT License.
 
 ---
 
-## Author
-**Pranjal Gautam**  
+## Author and Co-Author
+**Pranjal Gautam, Bhargavi Joshi, Manya Bhardwaj, Paras Yadav**
 Feel free to reach out for contributions, improvements, or queries related to simulations and optimizations in UAV systems.
