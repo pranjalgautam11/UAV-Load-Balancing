@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAV Signal and Collision Avoidance Simulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        canvas {
+            border: 1px solid black;
+        } 
+        #controls {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>UAV Signal and Collision Avoidance Simulation</h1>
+    <div id="controls">
+        <label for="numUAVs">Select Number of requests </label>
+        <select id="numUAVs">
+            <option value="1">1 request</option>
+            <option value="2">2 request</option>
+            <option value="3">3 request</option>
+        </select>
+        <button onclick="sendSignals()">Send Signal</button>
+    </div>
+
+    <canvas id="canvas" width="800" height="600"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const numUAVsSelect = document.getElementById('numUAVs');
+        let uavs = [];
+        let iotDevices = [
+            { x: 100, y: 100, z: 0 },  // IoT device 1
+            { x: 700, y: 100, z: 0 },  // IoT device 2
+            { x: 300, y: 500, z: 50 }, // IoT device 3 (simulating 3D with Z axis)
+        ];
+        let signalSent = false;
+
+        // Speed of UAV movement (slower movement)
+        const UAV_SPEED = 0.5;
+
+        // Draw the axes
+        function drawAxes() {
+            // Draw X, Y, Z axes
+            ctx.beginPath();
+            ctx.moveTo(100, 300); // X-axis
+            ctx.lineTo(700, 300);
+            ctx.strokeStyle = 'black';
+            ctx.stroke();
+            ctx.closePath();
+            ctx.beginPath();
+            ctx.moveTo(400, 100); // Y-axis
+            ctx.lineTo(400, 500);
+            ctx.strokeStyle = 'black';
+            ctx.stroke();
+            ctx.closePath();
+
+            // Z axis (just for visualization purposes)
+            ctx.beginPath();
+            ctx.moveTo(400, 300); // Z-axis (conceptually along the Z)
+            ctx.lineTo(300, 200);
+            ctx.strokeStyle = 'gray';
+            ctx.stroke();
+            ctx.closePath();
+
+            // Labels for axes
+            ctx.font = '16px Arial';
+            ctx.fillStyle = 'black';
+            ctx.fillText('X', 710, 310);
+            ctx.fillText('Y', 390, 90);
+            ctx.fillText('Z', 300, 180);
+        }
+
+        // Draw IoT devices
+        function drawIoTDevices() {
+            ctx.fillStyle = 'blue';
+            iotDevices.forEach(device => {
+                ctx.beginPath();
+                ctx.arc(device.x, device.y, 15, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.closePath();
+            });
+        }
+
+        // Draw UAVs
+        function drawUAVs() {
+            uavs.forEach((uav, index) => {
+                ctx.beginPath();
+                ctx.arc(uav.x, uav.y, 10, 0, Math.PI * 2); // UAV represented as a circle
+                ctx.fillStyle = index === 0 ? 'green' : (index === 1 ? 'red' : 'purple');
+                ctx.fill();
+                ctx.closePath();
+            });
+        }
+
+        // Create UAVs
+        function createUAVs(num) {
+            uavs = [];
+            for (let i = 0; i < num; i++) {
+                let uav = {
+                    x: 50,  // Starting position (far left of the canvas)
+                    y: 50 + i * 100, // Distribute UAVs along the Y axis initially
+                    z: 0,
+                    target: iotDevices[i % iotDevices.length], // Each UAV has a target device
+                    moving: false
+                };
+                uavs.push(uav);
+            }
+        }
+
+        // Avoid collision by checking UAV positions
+        function avoidCollisions() {
+            uavs.forEach((uav1, index1) => {
+                uavs.forEach((uav2, index2) => {
+                    if (index1 !== index2) {
+                        // Simple collision avoidance logic: If two UAVs are too close, they move in different directions
+                        const distance = Math.sqrt(Math.pow(uav1.x - uav2.x, 2) + Math.pow(uav1.y - uav2.y, 2));
+                        if (distance < 50) {
+                            // Move UAV1 and UAV2 in different directions
+                            if (uav1.x < uav2.x) uav1.x -= UAV_SPEED;
+                            else uav1.x += UAV_SPEED;
+
+                            if (uav1.y < uav2.y) uav1.y -= UAV_SPEED;
+                            else uav1.y += UAV_SPEED;
+                        }
+                    }
+                });
+            });
+        }
+
+        // Move UAVs towards their target
+        function moveUAVs() {
+            if (!signalSent) return;
+            uavs.forEach((uav, index) => {
+                if (index === 0) { // UAV 1 moves along X axis
+                    if (uav.x < uav.target.x) uav.x += UAV_SPEED;
+                    if (uav.x > uav.target.x) uav.x -= UAV_SPEED;
+                }
+
+                if (index === 1) { // UAV 2 moves along X and Y axes
+                    if (uav.x < uav.target.x) uav.x += UAV_SPEED;
+                    if (uav.x > uav.target.x) uav.x -= UAV_SPEED;
+                    if (uav.y < uav.target.y) uav.y += UAV_SPEED;
+                    if (uav.y > uav.target.y) uav.y -= UAV_SPEED;
+                }
+
+                if (index === 2) { // UAV 3 moves along X, Y, and Z axes
+                    if (uav.x < uav.target.x) uav.x += UAV_SPEED;
+                    if (uav.x > uav.target.x) uav.x -= UAV_SPEED;
+                    if (uav.y < uav.target.y) uav.y += UAV_SPEED;
+                    if (uav.y > uav.target.y) uav.y -= UAV_SPEED;
+                    if (uav.z < uav.target.z) uav.z += UAV_SPEED;
+                    if (uav.z > uav.target.z) uav.z -= UAV_SPEED;
+                }
+            });
+        }
+
+        // Function to trigger signal and start UAV movement
+        function sendSignals() {
+            signalSent = true;
+            let numUAVs = parseInt(numUAVsSelect.value);
+            createUAVs(numUAVs);
+            animate();
+        }
+
+        // Animation loop
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawAxes();
+            drawIoTDevices();
+            avoidCollisions(); // Check for UAV collision avoidance
+            moveUAVs();
+            drawUAVs();
+
+            // Request animation frame for the next iteration of the animation loop
+            requestAnimationFrame(animate);
+        }
+
+        // Initial setup
+        drawAxes();
+        drawIoTDevices();
+    </script>
+</body>
+</html>
