@@ -70,73 +70,21 @@ Steps:
 
 ---
 
-## Simulation & Methodology
-
-### Architecture Diagram
+## Architecture Diagram
 <img src="Screenshots/Architecture-Diagram.jpg"/>
-
-### UAV-Based Simulation Flow
-The system implements the following core methodologies:
-
-#### A. Data Preprocessing
-- Noise filtering from UAV sensor logs (e.g., CQI reports)
-- Normalizing power consumption across different UAVs
-- Interpolating missing telemetry values
-
-#### B. Feature Extraction
-- Battery consumption rate
-- Task processing time
-- Communication latency between UAV and base stations
-
-#### C. Load Balancing Algorithms
-- **Dynamic Load Balancing Algorithm**: Allocates tasks based on live telemetry
-- **Reinforcement Learning-Based Allocation**: Improves over time
-- **Genetic Algorithm**: Optimizes UAV path for minimal energy usage
-
-| Algorithm      | Key Feature              | Load Distribution | Energy Efficiency | Scalability | Computational Cost | Learning Capability       |
-|----------------|--------------------------|-------------------|--------------------|-------------|---------------------|---------------------------|
-| Dynamic        | Real-time reallocation   | Adaptive          | High               | High        | Moderate            | None                      |
-| RL-Based       | Self-learning allocation | Optimal over time | High               | High        | High                | Learns from experience    |
-| Genetic        | Energy-aware routing     | Adaptive          | Low                | High        | Higher              | None                      |
-
-#### D. Communication Protocols
-- **LEACH**: Low Energy Adaptive Clustering Hierarchy
-- **TDMA**: Time Division Multiple Access protocol for collision-free communication
 
 ---
 
-## Result Analysis
-
-### A. IoT & UAV Movement Simulation
-- Random IoT nodes are placed within defined boundaries
-- UAVs move and offload tasks based on proximity and energy status
-
-<p align="center"><img src="UAV_Signal_and_Collision_Avoidance_Simulation.gif" width="400"/> <img src="Screenshots/Trajectory.jpg" width="400"/></p>
-
-### B. Energy Consumption Comparison
-
-| Number of Offloads | Existing Single UAV (J) | Proposed Multi UAV (J) | Energy Reduction (%) |
-|---------------------|--------------------------|--------------------------|------------------------|
-| 0                   | 70                       | 35                       | 50.00%                 |
-| 1–3                 | 70                       | 35                       | 50.00%                 |
-| 4–8                 | 50                       | 30                       | 40.00%                 |
-| 9                   | 49                       | 29                       | 40.82%                 |
-
-### C. Energy & Latency Models
-- **Energy (E)** = Pt × T  
-- **Multi-UAV Energy (E_multi)** = E_single / n
-- **Latency (L)** = D / R  
-- **Multi-UAV Latency (L_multi)** = D / (R1 + R2 + ... + Rn)
 
 ### D. Performance Graphs
 - Energy Comparison Graph  
-  <p align="center"><img src="Screenshots/Energy_Consumption.jpg" width="300"/></p>
+  [Energy Graph]("Screenshots/Energy_Consumption.jpg")
 
 - Latency Reduction Graph  
-  <p align="center"><img src="Screenshots/Latency.jpg" width="300" height="188"/></p>
+  [Latency Graph]("Screenshots/Latency.jpg")
 
 - Task Completion Efficiency Graph  
-  <p align="center"><img src="Screenshots/Task_Completion.jpg" width="300"/></p>
+  [Efficiency Graph]("Screenshots/Task_Completion.jpg")
 
 ---
 
@@ -157,5 +105,5 @@ This project is licensed under the MIT License.
 ---
 
 ## Author and Co-Author
-**Pranjal Gautam, Bhargavi Joshi, Manya Bhardwaj, Paras Yadav**
+**Pranjal Gautam, Bhargavi Joshi, Paras Yadav**
 Feel free to reach out for contributions, improvements, or queries related to simulations and optimizations in UAV systems.
